@@ -3,7 +3,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.codepath.googleimagesearch.SettingsActivity" >
+    tools:context="com.codepath.googleimagesearch.SettingsActivity" 
+    android:padding="20dp">
     
     <TextView
         android:id="@+id/tvOptions"
@@ -13,6 +14,7 @@
         />
     
     <TextView 
+        android:layout_marginTop="50dp"
         android:id="@+id/tvSize"
         android:text="Image Size"
         android:layout_width="150dp"
@@ -27,6 +29,7 @@
         android:layout_toRightOf="@+id/tvSize" />
     
     <TextView 
+        android:layout_marginTop="50dp"
         android:id="@+id/tvColor"
         android:text="Image Color"
         android:layout_width="150dp"
@@ -41,6 +44,7 @@
         android:layout_toRightOf="@+id/tvColor" />
     
     <TextView 
+        android:layout_marginTop="50dp"
         android:id="@+id/tvType"
         android:text="Image Type"
         android:layout_width="150dp"
@@ -54,6 +58,7 @@
         android:layout_toRightOf="@+id/tvType" />
     
     <EditText 
+        android:layout_marginTop="50dp"
         android:id="@+id/etSite"
         android:hint="Site Filter"
         android:layout_width="300dp"
@@ -65,6 +70,7 @@
         android:text="Save"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etSite" />
+        android:layout_below="@+id/etSite" 
+        android:layout_centerHorizontal="true"/>
         
 </RelativeLayout>

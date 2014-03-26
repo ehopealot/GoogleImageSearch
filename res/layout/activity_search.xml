@@ -29,11 +29,18 @@
             android:text="Search"
             android:onClick="onSearchButtonClicked" />
     </LinearLayout>
+    <TextView 
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/llTopArea"
+        android:layout_marginTop="40dp" />
     <GridView 
-        android:background="#d7a4b8"
+        android:background="#C4F5FF"
         android:id="@+id/gvSearchResults"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/llTopArea"
         android:layout_marginTop="10dp"
         android:columnWidth="90dp"

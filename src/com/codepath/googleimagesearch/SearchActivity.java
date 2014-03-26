@@ -22,6 +22,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -51,6 +52,7 @@ public class SearchActivity extends ActionBarActivity {
         }
     }
 
+    private static final int SETTINGS_REQ_CODE = 25;
     private static final String SEARCH_URL = "http://ajax.googleapis.com/ajax/services/search/images";
 
     public static final AsyncHttpClient CLIENT = new AsyncHttpClient();
@@ -79,14 +81,13 @@ public class SearchActivity extends ActionBarActivity {
     private int mIndex = 0;
     private int mLoadingIndex = 0;
 
-    private int mMaxItemCountSeen = 0;
+    private TextView mErrorText;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putStringArrayList(IMAGES_KEY, mImages);
         outState.putInt(INDEX_KEY, mIndex);
         outState.putInt(LOADING_INDEX_KEY, mLoadingIndex);
-        outState.putInt(MAX_ITEM_COUNT_SEEN_KEY, mMaxItemCountSeen);
         outState.putStringArrayList(STARTS_KEY, mStarts);
         outState.putStringArrayList(LABELS_KEY, mLabels);
         outState.putString(QUERY_KEY, mQuery);
@@ -99,7 +100,7 @@ public class SearchActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         ArrayList<String> images;
         setContentView(R.layout.activity_search);
-
+        mErrorText = (TextView) findViewById(R.id.tvError);
         if (savedInstanceState != null) {
             images = savedInstanceState.getStringArrayList(IMAGES_KEY);
             mStarts = savedInstanceState.getStringArrayList(STARTS_KEY);
@@ -169,7 +170,27 @@ public class SearchActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.miSettings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            settingsIntent.putExtra(SettingsActivity.SETTINGS_KEY, mSettings);
+            startActivityForResult(settingsIntent, SETTINGS_REQ_CODE);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SETTINGS_REQ_CODE && resultCode == RESULT_OK && data != null) {
+            SettingsActivity.Settings newSettings = (SettingsActivity.Settings) data
+                    .getSerializableExtra(SettingsActivity.SETTINGS_KEY);
+            if (newSettings.size != mSettings.size || newSettings.color != mSettings.color
+                    || newSettings.type != mSettings.type || !newSettings.site.equalsIgnoreCase(mSettings.site)) {
+                // re-trigger the search
+                mSettings = newSettings;
+                onSearchButtonClicked(null);
+            }
+        }
     }
 
     public void loadData(final String start) {
@@ -195,6 +216,8 @@ public class SearchActivity extends ActionBarActivity {
             params.add("as_sitesearch", mSettings.site);
         }
         mLoadingIndex = mIndex;
+        mErrorText.setVisibility(View.GONE);
+
         CLIENT.get(SEARCH_URL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject results) {
@@ -224,12 +247,18 @@ public class SearchActivity extends ActionBarActivity {
                     showError();
                     mLoadingIndex -= 1;
                     mIndex -= 1;
+                    if (mIndex == 0) {
+                        mErrorText.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
             @Override
             public void onFailure(java.lang.Throwable e, org.json.JSONObject errorResponse) {
                 mLoadingIndex -= 1;
+                if (mIndex == 0) {
+                    mErrorText.setVisibility(View.VISIBLE);
+                }
             }
 
         });
@@ -242,7 +271,6 @@ public class SearchActivity extends ActionBarActivity {
         mImages.clear();
         mFullSizeUrls.clear();
         mIndex = 0;
-        mMaxItemCountSeen = 0;
         loadData(null);
     }
 
