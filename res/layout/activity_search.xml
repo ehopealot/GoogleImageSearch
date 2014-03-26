@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.googleimagesearch.SearchActivity"
+    tools:ignore="MergeRootFrame" >
+    
+    <LinearLayout
+        android:id="@+id/llTopArea"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop = "10dp">
+        
+        <EditText
+            android:id="@+id/etSearchField"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="3" 
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"/>
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Search"
+            android:onClick="onSearchButtonClicked" />
+    </LinearLayout>
+    <GridView 
+        android:background="#d7a4b8"
+        android:id="@+id/gvSearchResults"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@+id/llTopArea"
+        android:layout_marginTop="10dp"
+        android:columnWidth="90dp"
+        android:rowHeight="90dp"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit">
+        
+        
+    </GridView>
+    
+</RelativeLayout>

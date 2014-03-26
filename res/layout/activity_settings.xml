@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.googleimagesearch.SettingsActivity" >
+    
+    <TextView
+        android:id="@+id/tvOptions"
+        android:text="Advanced Options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    
+    <TextView 
+        android:id="@+id/tvSize"
+        android:text="Image Size"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/tvOptions" />
+    
+    <Spinner
+        android:id="@+id/spSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvSize"
+        android:layout_toRightOf="@+id/tvSize" />
+    
+    <TextView 
+        android:id="@+id/tvColor"
+        android:text="Image Color"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/tvSize" />
+    
+    <Spinner
+        android:id="@+id/spColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvColor"
+        android:layout_toRightOf="@+id/tvColor" />
+    
+    <TextView 
+        android:id="@+id/tvType"
+        android:text="Image Type"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/tvColor" />
+    <Spinner
+        android:id="@+id/spType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvType"
+        android:layout_toRightOf="@+id/tvType" />
+    
+    <EditText 
+        android:id="@+id/etSite"
+        android:hint="Site Filter"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvType" />
+    
+    <Button
+        android:id="@+id/btnSave"
+        android:text="Save"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSite" />
+        
+</RelativeLayout>

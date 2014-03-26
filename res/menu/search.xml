@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.codepath.googleimagesearch.SearchActivity" >
+
+        <item
+        android:id="@+id/miSettings"
+        android:icon="@drawable/ic_gear"
+        android:orderInCategory="100"
+        android:title="Settings"
+        app:showAsAction="always"/>
+
+</menu>
