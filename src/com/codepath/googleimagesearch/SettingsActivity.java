@@ -40,11 +40,6 @@ public class SettingsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        if (savedInstanceState == null) {
-            mSettings = (Settings) getIntent().getSerializableExtra(SETTINGS_KEY);
-        } else {
-            mSettings = (Settings) savedInstanceState.getSerializable(SETTINGS_KEY);
-        }
         mSizeSpinner = (Spinner) findViewById(R.id.spSize);
         ArrayAdapter<CharSequence> sizeAdapter = ArrayAdapter.createFromResource(this, R.array.sizes,
                 android.R.layout.simple_spinner_item);
@@ -60,6 +55,13 @@ public class SettingsActivity extends ActionBarActivity {
                 android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mTypeSpinner.setAdapter(typeAdapter);
+
+        if (savedInstanceState == null) {
+            mSettings = (Settings) getIntent().getSerializableExtra(SETTINGS_KEY);
+        } else {
+            mSettings = (Settings) savedInstanceState.getSerializable(SETTINGS_KEY);
+        }
+
         mSizeSpinner.setSelection(mSettings.size);
         mColorSpinner.setSelection(mSettings.color);
         mTypeSpinner.setSelection(mSettings.type);

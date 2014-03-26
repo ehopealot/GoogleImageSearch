@@ -29,13 +29,6 @@
             android:text="Search"
             android:onClick="onSearchButtonClicked" />
     </LinearLayout>
-    <TextView 
-        android:id="@+id/tvError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/llTopArea"
-        android:layout_marginTop="40dp" />
     <GridView 
         android:background="#C4F5FF"
         android:id="@+id/gvSearchResults"
@@ -51,5 +44,14 @@
         
         
     </GridView>
+        <TextView 
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/llTopArea"
+        android:text="There was an error performing this search."
+        android:visibility="gone"
+        android:layout_marginTop="40dp" />
     
 </RelativeLayout>
